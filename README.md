@@ -60,19 +60,19 @@ systemctl is-enabled altbet #To check if altbet service is enabled on boot
 ***
 
 ## Masternode update:
-In order to update your altbet Masternode to version 1.0, please run the following commands:
+In order to update your altbet Masternode to version 1.1, please run the following commands:
 ```
 cd /tmp
-wget -N https://github.com/altbet/abet/releases/download/v1.0/altbet-v1.0-ubu1604.tar.gz
-tar xvzf altbet-v1.0-ubu1604.tar.gz
+wget -N https://github.com/altbet/abet/releases/download/v1.1/altbet-v1.1-ubu1604.tar.gz
+tar xvzf altbet-v1.1-ubu1604.tar.gz
 systemctl stop altbet
 mv altbetd altbet-cli /usr/local/bin
 systemctl start altbet
-rm altbet-v1.0-ubu1604.tar.gz
+rm altbet-v1.1-ubu1604.tar.gz
 altbet-cli getinfo
 ```
 Open your desktop wallet and start the node from there.
 ***
 
-## Copyrights
+## Credits
 https://github.com/zoldur
