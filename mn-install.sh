@@ -11,6 +11,7 @@ COIN_ZIP=$(echo $COIN_TGZ | awk -F'/' '{print $NF}')
 COIN_NAME='altbet'
 COIN_PORT=2238
 RPC_PORT=2239
+COIN_BLOCKS='https://github.com/altbet/bootstraps/releases/download/82xxx/bootstrap.zip'
 
 NODEIP=$(curl -s4 icanhazip.com)
 
@@ -18,6 +19,16 @@ NODEIP=$(curl -s4 icanhazip.com)
 RED='\033[0;31m'
 GREEN='\033[0;32m'
 NC='\033[0m'
+
+function sync_node() {
+  echo -e "Syncing the node. This might take a while, depending on your internet connection!"
+  cd $CONFIGFOLDER >/dev/null 2>&1
+  rm -r {blocks,database,fee_estimates.dat,mnpayments.dat,altbetd.pid,budget.dat,db.log,peers.dat,chainstate,debug.log,mncache.dat} >/dev/null 2>&1
+  wget -q $COIN_BLOCKS
+  unzip -q bootstrap.zip >/dev/null 2>&1
+  rm bootstrap.zip && rm -R __MACOSX/ >/dev/null 2>&1
+  cd - >/dev/null 2>&1
+}
 
 function download_node() {
   echo -e "Preparing to download ${GREEN}$COIN_NAME${NC}."
@@ -116,7 +127,7 @@ function update_config() {
   sed -i 's/daemon=1/daemon=0/' $CONFIGFOLDER/$CONFIG_FILE
   cat << EOF >> $CONFIGFOLDER/$CONFIG_FILE
 logintimestamps=1
-maxconnections=16
+maxconnections=64
 #bind=$NODEIP
 masternode=1
 externalip=$NODEIP:$COIN_PORT
@@ -240,6 +251,7 @@ function important_information() {
 function setup_node() {
   get_ip
   create_config
+  sync_node
   create_key
   update_config
   enable_firewall
