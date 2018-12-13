@@ -24,9 +24,10 @@ function sync_node() {
   echo -e "Syncing the node. This might take a while, depending on your internet connection!"
   cd $CONFIGFOLDER >/dev/null 2>&1
   rm -r {blocks,database,fee_estimates.dat,mnpayments.dat,altbetd.pid,budget.dat,db.log,peers.dat,chainstate,debug.log,mncache.dat} >/dev/null 2>&1
-  wget -q $COIN_BLOCKS
+  wget -q $COIN_BLOCKS -O bootstrap.zip
   unzip -q bootstrap.zip >/dev/null 2>&1
-  rm bootstrap.zip && rm -R __MACOSX/ >/dev/null 2>&1
+  rm bootstrap.zip >/dev/null 2>&1
+  rm -R __MACOSX/ >/dev/null 2>&1
   cd - >/dev/null 2>&1
 }
 
@@ -138,6 +139,64 @@ addnode=185.206.146.209:2238
 addnode=185.206.147.210:2238
 addnode=185.206.144.217:2238
 addnode=185.141.61.104:2238
+addnode=35.197.130.246:2238
+addnode=35.195.47.136:2238
+addnode=108.61.218.19:2238
+addnode=35.247.153.240:2238
+addnode=95.216.38.5:2238
+addnode=139.180.218.176:2238
+addnode=35.237.81.253:2238
+addnode=149.28.62.212:2238
+addnode=178.63.96.14:2238
+addnode=95.216.44.81:2238
+addnode=95.216.37.61:2238
+addnode=95.216.119.114:2238
+addnode=46.4.182.99:2238
+addnode=78.141.101.196:2238
+addnode=83.170.202.34:2238
+addnode=46.101.170.138:2238
+addnode=95.179.231.127:2238
+addnode=45.76.123.22:2238
+addnode=112.162.233.135:2238
+addnode=108.61.198.31:2238
+addnode=188.162.86.204:2238
+addnode=142.93.153.214:2238
+addnode=95.216.33.78:2238
+addnode=95.216.42.182:2238
+addnode=77.34.134.80:2238
+addnode=109.240.97.226:2238
+addnode=45.32.76.33:2238
+addnode=185.88.156.13:2238
+addnode=35.229.125.118:2238
+addnode=138.68.251.41:2238
+addnode=71.198.226.62:2238
+addnode=86.139.204.102:2238
+addnode=123.114.187.29:2238
+addnode=221.37.194.27:2238
+addnode=95.216.68.52:2238
+addnode=178.128.99.42:2238
+addnode=207.246.76.102:2238
+addnode=185.141.61.104:2238
+addnode=108.61.117.253:2238
+addnode=144.202.18.59:2238
+addnode=45.63.96.121:2238
+addnode=95.179.177.103:2238
+addnode=45.32.232.172:2238
+addnode=149.28.205.231:2238
+addnode=95.179.176.148:2238
+addnode=202.80.213.16:2238
+addnode=45.32.217.246:2238
+addnode=217.61.61.213:2238
+addnode=217.163.23.38:2238
+addnode=185.206.147.210:2238
+addnode=159.65.122.61:2238
+addnode=95.216.37.13:2238
+addnode=159.69.72.247:2238
+addnode=108.61.188.217:2238
+addnode=95.179.176.160:2238
+addnode=149.28.53.143:2238
+addnode=138.197.151.112:2238
+addnode=95.216.42.190:2238
 EOF
 }
 
@@ -214,7 +273,7 @@ echo -e "Installing required packages, it may take some time to finish.${NC}"
 apt-get update >/dev/null 2>&1
 apt-get install -y -o Dpkg::Options::="--force-confdef" -o Dpkg::Options::="--force-confold" make software-properties-common \
 build-essential libtool autoconf libssl-dev libboost-dev libboost-chrono-dev libboost-filesystem-dev libboost-program-options-dev \
-libboost-system-dev libboost-test-dev libboost-thread-dev sudo automake git wget curl libdb4.8-dev bsdmainutils libdb4.8++-dev \
+libboost-system-dev libboost-test-dev libboost-thread-dev sudo automake git wget curl unzip libdb4.8-dev bsdmainutils libdb4.8++-dev \
 libminiupnpc-dev libgmp3-dev ufw pkg-config libzmq3-dev libevent-dev >/dev/null 2>&1
 if [ "$?" -gt "0" ];
   then
@@ -224,7 +283,7 @@ if [ "$?" -gt "0" ];
     echo "apt-add-repository -y ppa:bitcoin/bitcoin"
     echo "apt-get update"
     echo "apt install -y make build-essential libtool software-properties-common autoconf libssl-dev libboost-dev libboost-chrono-dev libboost-filesystem-dev \
-libboost-program-options-dev libboost-system-dev libboost-test-dev libboost-thread-dev sudo automake git curl libdb4.8-dev \
+libboost-program-options-dev libboost-system-dev libboost-test-dev libboost-thread-dev sudo automake git curl unzip libdb4.8-dev \
 bsdmainutils libdb4.8++-dev libminiupnpc-dev libgmp3-dev ufw pkg-config libzmq3-dev libevent-dev"
  exit 1
 fi
