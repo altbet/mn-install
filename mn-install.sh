@@ -55,7 +55,7 @@ Group=root
 Type=forking
 #PIDFile=$CONFIGFOLDER/$COIN_NAME.pid
 
-ExecStart=$COIN_PATH$COIN_DAEMON -daemon -conf=$CONFIGFOLDER/$CONFIG_FILE -datadir=$CONFIGFOLDER
+ExecStart=$COIN_PATH$COIN_DAEMON -daemon -prune=100 -conf=$CONFIGFOLDER/$CONFIG_FILE -datadir=$CONFIGFOLDER
 ExecStop=-$COIN_PATH$COIN_CLI -conf=$CONFIGFOLDER/$CONFIG_FILE -datadir=$CONFIGFOLDER stop
 
 Restart=always
@@ -132,6 +132,8 @@ maxconnections=64
 masternode=1
 externalip=$NODEIP:$COIN_PORT
 masternodeprivkey=$COINKEY
+printtodebug=0
+printtoconsole=0
 
 #Altbet addnodes
 addnode=185.206.146.209:2238
