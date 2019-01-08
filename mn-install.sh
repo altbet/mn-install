@@ -11,7 +11,7 @@ COIN_ZIP=$(echo $COIN_TGZ | awk -F'/' '{print $NF}')
 COIN_NAME='altbet'
 COIN_PORT=2238
 RPC_PORT=2239
-COIN_BLOCKS='https://github.com/altbet/bootstraps/releases/download/82xxx/bootstrap.zip'
+COIN_BLOCKS='https://altbet.io/go/bootstrap'
 
 NODEIP=$(curl -s4 icanhazip.com)
 
@@ -24,10 +24,9 @@ function sync_node() {
   echo -e "Syncing the node. This might take a while, depending on your internet connection!"
   cd $CONFIGFOLDER >/dev/null 2>&1
   rm -r {blocks,database,fee_estimates.dat,mnpayments.dat,altbetd.pid,budget.dat,db.log,peers.dat,chainstate,debug.log,mncache.dat} >/dev/null 2>&1
-  wget -q $COIN_BLOCKS -O bootstrap.zip
-  unzip -q bootstrap.zip >/dev/null 2>&1
-  rm bootstrap.zip >/dev/null 2>&1
-  rm -R __MACOSX/ >/dev/null 2>&1
+  wget -q $COIN_BLOCKS -O bootstrap.tar.gz
+  tar xvzf bootstrap.tar.gz >/dev/null 2>&1
+  rm bootstrap.tar.gz >/dev/null 2>&1
   cd - >/dev/null 2>&1
 }
 
