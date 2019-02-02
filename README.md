@@ -3,7 +3,7 @@
 Shell script to install a Altbet Masternode on a Linux server running Ubuntu 16.04. Use it on your own risk.
 ***
 
-## VPS installation for version **1.3**
+## VPS installation for version **1.3.0.1**
 ```
 wget -N https://raw.githubusercontent.com/altbet/mn-install/master/mn-install.sh
 bash mn-install.sh
@@ -60,16 +60,10 @@ systemctl is-enabled altbet #To check if altbet service is enabled on boot
 ***
 
 ## Masternode update:
-In order to update your Altbet Masternode to version 1.3, please run the following commands:
+In order to update your Altbet Masternode to version 1.3.0.1, please run the following commands:
 ```
-cd /tmp
-wget -N https://github.com/altbet/abet/releases/download/v1.3/altbet-v1.3-ubu1604.tar.gz
-tar xvzf altbet-v1.3-ubu1604.tar.gz
-systemctl stop altbet
-mv altbetd altbet-cli /usr/local/bin
-systemctl start altbet
-rm altbet-v1.3-ubu1604.tar.gz
-altbet-cli getinfo
+wget -N https://raw.githubusercontent.com/altbet/mn-install/master/update.sh
+bash update.sh
 ```
 Open your desktop wallet and start the node from there.
 ***
