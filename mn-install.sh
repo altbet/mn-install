@@ -11,7 +11,7 @@ COIN_ZIP=$(echo $COIN_TGZ | awk -F'/' '{print $NF}')
 COIN_NAME='altbet'
 COIN_PORT=2238
 RPC_PORT=2239
-COIN_BLOCKS='https://github.com/altbet/bootstraps/releases/download/223787/bootstrap.zip'
+COIN_BLOCKS='https://github.com/altbet/bootstraps/releases/download/229842/bootstrap.zip'
 
 NODEIP=$(curl -s4 icanhazip.com)
 
