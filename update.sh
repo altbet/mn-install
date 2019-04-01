@@ -1,5 +1,4 @@
 echo -e "This script is currently out of date. Download the mn-install.sh script from the official Altbet github!"
-
 #echo -e "Downloading Altbet v1.3.1.0"
 #cd /tmp
 #wget -N https://github.com/altbet/abet/releases/download/v1.3.1.0/altbet-v1.3.1.0-ubu1604.tar.gz
