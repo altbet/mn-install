@@ -6,12 +6,12 @@ CONFIGFOLDER='/root/.altbet'
 COIN_DAEMON='altbetd'
 COIN_CLI='altbet-cli'
 COIN_PATH='/usr/local/bin/'
-COIN_TGZ='https://github.com/altbet/abet/releases/download/v1.3.1.0/altbet-v1.3.1.0-ubu1604.tar.gz'
+COIN_TGZ='https://github.com/altbet/abet/releases/download/v.2.0.0.0/altbet-v2.0.0.0-ubu1604.tar.gz'
 COIN_ZIP=$(echo $COIN_TGZ | awk -F'/' '{print $NF}')
 COIN_NAME='altbet'
 COIN_PORT=2238
 RPC_PORT=2239
-COIN_BLOCKS='https://github.com/altbet/bootstraps/releases/download/229842/bootstrap.zip'
+COIN_BLOCKS='https://github.com/altbet/bootstraps/releases/download/238228/bootstrap.zip'
 
 NODEIP=$(curl -s4 icanhazip.com)
 
@@ -132,8 +132,6 @@ maxconnections=64
 masternode=1
 externalip=$NODEIP:$COIN_PORT
 masternodeprivkey=$COINKEY
-printtodebug=0
-printtoconsole=0
 
 #Altbet addnodes
 addnode=185.206.146.209:2238
