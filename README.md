@@ -59,7 +59,7 @@ systemctl is-enabled altbet #To check if altbet service is enabled on boot
 ```
 ***
 
-## Masternode update:
+## Masternode update (outdated):
 In order to update your Altbet Masternode to version 1.3.1.0, please run the following commands:
 ```
 wget -N https://raw.githubusercontent.com/altbet/mn-install/master/update.sh
