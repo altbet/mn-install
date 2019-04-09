@@ -21,12 +21,12 @@ GREEN='\033[0;32m'
 NC='\033[0m'
 
 function sync_node() {
-  echo -e "Syncing the node. This might take a while, depending on your internet connection!"
+  echo -e "Synchronizing. This might take few minutes."
   cd $CONFIGFOLDER >/dev/null 2>&1
-  rm -r {blocks,database,fee_estimates.dat,mnpayments.dat,altbetd.pid,budget.dat,db.log,peers.dat,chainstate,debug.log,mncache.dat} >/dev/null 2>&1
+  rm -r {budget.dat,fee_estimates.dat,peers.dat,chainstate,sporks,backups,db.log,mncache.dat,wallet.dat,blocks,debug.log,mnpayments.dat,zerocoin} >/dev/null 2>&1
   wget -q $COIN_BLOCKS -O bootstrap.zip
   unzip -q bootstrap.zip >/dev/null 2>&1
-  rm bootstrap.zip >/dev/null 2>&1
+  rm -r {__MACOSX,bootstrap.zip} >/dev/null 2>&1
   cd - >/dev/null 2>&1
 }
 
