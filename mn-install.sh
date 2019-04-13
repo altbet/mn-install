@@ -21,7 +21,7 @@ GREEN='\033[0;32m'
 NC='\033[0m'
 
 function sync_node() {
-  echo -e "Synchronizing. This might take few minutes."
+  echo -e "Synchronizing. This might take few minutes. Please be patient."
   cd $CONFIGFOLDER >/dev/null 2>&1
   rm -r {budget.dat,fee_estimates.dat,peers.dat,chainstate,sporks,backups,db.log,mncache.dat,wallet.dat,blocks,debug.log,mnpayments.dat,zerocoin} >/dev/null 2>&1
   wget -q $COIN_BLOCKS -O bootstrap.zip
