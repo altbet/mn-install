@@ -11,7 +11,7 @@ COIN_ZIP=$(echo $COIN_TGZ | awk -F'/' '{print $NF}')
 COIN_NAME='altbet'
 COIN_PORT=2238
 RPC_PORT=2239
-COIN_BLOCKS='https://github.com/altbet/bootstraps/releases/download/242100/bootstrap.zip'
+COIN_BLOCKS='https://github.com/altbet/bootstraps/releases/download/260684/bootstrap.zip'
 
 NODEIP=$(curl -s4 icanhazip.com)
 
@@ -138,17 +138,21 @@ addnode=185.206.146.209:2238
 addnode=185.206.147.210:2238
 addnode=185.206.144.217:2238
 addnode=185.141.61.104:2238
-addnode=8.9.36.49:2238
-addnode=45.32.87.111:2238
-addnode=167.86.89.64:2238
-addnode=188.40.173.216:2238
-addnode=79.143.188.183:2238
-addnode=46.4.178.72:2238
-addnode=54.38.35.208:2238
-addnode=18.191.235.229:2238
-addnode=80.211.255.112:2238
-addnode=95.216.123.42:2238
-addnode=3.91.213.21:2238
+addnode=176.107.131.7:2238 
+addnode=167.86.84.174:2238
+addnode=188.40.174.120:2238
+addnode=217.61.61.20:2238 
+addnode=3.92.226.82:2238
+addnode=35.162.236.179:2238
+addnode=54.190.130.126:2238
+addnode=199.247.5.72:2238 
+addnode=80.211.0.140:2238
+addnode=5.249.145.126:2238 
+addnode=3.91.213.21:2238 
+addnode=136.243.63.196:2238
+addnode=46.4.178.71:2238
+addnode=207.180.247.45:2238 
+addnode=3.86.255.84:2238
 EOF
 }
 
