@@ -12,7 +12,7 @@ echo -e "Preparing Altbet for latest bootstrap"
 cd /root/.altbet
 mv wallet.dat walletold1.dat
 rm -r {budget.dat,fee_estimates.dat,peers.dat,chainstate,sporks,backups,db.log,mncache.dat,wallet.dat,blocks,debug.log,mnpayments.dat,zerocoin} >/dev/null 2>&1
-wget -q https://github.com/altbet/bootstraps/releases/download/242100/bootstrap.zip -O bootstrap.zip
+wget -q https://github.com/altbet/bootstraps/releases/download/260684/bootstrap.zip -O bootstrap.zip
 unzip bootstrap.zip
 rm bootstrap.zip >/dev/null 2>&1
 cd - >/dev/null 2>&1
@@ -20,10 +20,12 @@ clear
 echo -e "Starting Altbet daemon, please be patient"
 systemctl start altbet
 clear
-sleep 5
-altbet-cli addnode 8.9.36.49:2238 onetry
-sleep 2
-altbet-cli addnode 45.32.87.111:2238 onetry
-sleep 2
+sleep 3
+altbet-cli addnode 176.107.131.7:2238 onetry
+sleep 1
+altbet-cli addnode 167.86.84.174:2238 onetry
+sleep 1
+altbet-cli addnode 188.40.174.120:2238 onetry
+sleep 1
 altbet-cli getinfo
 echo -e "Update completed, have a nice day :)"
