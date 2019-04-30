@@ -15,7 +15,7 @@ bash mn-install.sh
 After the Masternode is up and running, you need to configure the desktop wallet accordingly. Here are the steps:
 1. Open the altbet Desktop Wallet.
 2. Go to RECEIVE and create a New Address: **MN1**
-3. Send **1000** ABET to **MN1**. You need to send all 1000 coins in one single transaction.
+3. Send **5000** ABET to **MN1**. You need to send all 5000 coins in one single transaction.
 4. Wait for 16 confirmations.
 5. Go to **Help -> "Debug Window - Console"**
 6. Type the following command: **masternode outputs**
@@ -35,7 +35,7 @@ Alias Address Privkey TxHash TxIndex
 12. Select your MN and click **Start Alias** to start it.
 13. Alternatively, open **Debug Console** and type:
 ```
-startmasternode alias false MN1
+startmasternode "alias" "0" "MN1"
 ```
 14. Login to your VPS and check your masternode status by running the following command to confirm your MN is running:
 ```
