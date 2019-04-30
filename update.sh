@@ -12,7 +12,7 @@ echo -e "Preparing Altbet for latest bootstrap"
 cd /root/.altbet
 mv wallet.dat walletold1.dat
 rm -r {budget.dat,fee_estimates.dat,peers.dat,chainstate,sporks,backups,db.log,mncache.dat,wallet.dat,blocks,debug.log,mnpayments.dat,zerocoin} >/dev/null 2>&1
-wget -q https://github.com/altbet/bootstraps/releases/download/260684/bootstrap.zip -O bootstrap.zip
+wget -q https://github.com/altbet/bootstraps/releases/download/279208/bootstrap.zip -O bootstrap.zip
 unzip bootstrap.zip
 rm bootstrap.zip >/dev/null 2>&1
 cd - >/dev/null 2>&1
