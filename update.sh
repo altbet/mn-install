@@ -1,12 +1,12 @@
-echo -e "Downloading Altbet v2.0.0.1"
+echo -e "Downloading Altbet v2.0.0.2"
 cd /tmp
-wget -N https://github.com/altbet/abet/releases/download/v.2.0.0.1/altbet-v2.0.0.1-ubu1604.tar.gz
-tar xvzf altbet-v2.0.0.1-ubu1604.tar.gz
+wget -N https://github.com/altbet/abet/releases/download/v.2.0.0.2/altbet-v2.0.0.2-ubu1604.tar.gz
+tar xvzf altbet-v2.0.0.2-ubu1604.tar.gz
 clear
 echo -e "Updating Altbet to the latest version"
 systemctl stop altbet
 mv altbetd altbet-cli /usr/local/bin
-rm altbet-v2.0.0.1-ubu1604.tar.gz
+rm altbet-v2.0.0.2-ubu1604.tar.gz
 clear
 echo -e "Preparing Altbet for latest bootstrap"
 cd /root/.altbet
@@ -21,11 +21,13 @@ echo -e "Starting Altbet daemon, please be patient"
 systemctl start altbet
 clear
 sleep 3
-altbet-cli addnode 176.107.131.7:2238 onetry
+altbet-cli addnode 45.77.59.229:2238 onetry
 sleep 1
-altbet-cli addnode 167.86.84.174:2238 onetry
+altbet-cli addnode 185.92.222.6:2238 onetry
 sleep 1
-altbet-cli addnode 188.40.174.120:2238 onetry
+altbet-cli addnode 80.211.255.112:2238 onetry
+sleep 1
+altbet-cli addnode 138.68.74.13:2238 onetry
 sleep 1
 altbet-cli getinfo
 echo -e "Update completed, have a nice day :)"
