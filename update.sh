@@ -1,23 +1,24 @@
-echo -e "Downloading Altbet v2.0.0.2"
+echo -e "Downloading lastest Altbet version"
 cd /tmp
-wget -N https://github.com/altbet/abet/releases/download/v.2.0.0.2/altbet-v2.0.0.2-ubu1604.tar.gz
-tar xvzf altbet-v2.0.0.2-ubu1604.tar.gz
+wget -N https://github.com/altbet/abet/releases/download/v.2.0.0.3/altbet-v2.0.0.3-ubu1604.tar.gz
+tar xvzf altbet-v2.0.0.3-ubu1604.tar.gz
 clear
-echo -e "Updating Altbet to the latest version"
+echo -e "Updating to the lastest Altbet version"
 systemctl stop altbet
 mv altbetd altbet-cli /usr/local/bin
-rm altbet-v2.0.0.2-ubu1604.tar.gz
+rm altbet-v2.0.0.3-ubu1604.tar.gz
 clear
-echo -e "Preparing Altbet for latest bootstrap"
+echo -e "Downloading latest bootstrap"
 cd /root/.altbet
 mv wallet.dat walletold1.dat
 rm -r {banlist.dat,budget.dat,fee_estimates.dat,peers.dat,chainstate,sporks,backups,db.log,mncache.dat,wallet.dat,blocks,debug.log,mnpayments.dat,zerocoin} >/dev/null 2>&1
-wget -q https://github.com/altbet-coin/bootstraps/releases/download/5-26-2019/5-26-2019.zip -O bootstrap.zip
+wget -q -4 https://github.com/altbet/bootstraps/releases/download/350450/bootstrap.zip -O bootstrap.zip
 unzip bootstrap.zip
+sleep 1
 rm bootstrap.zip >/dev/null 2>&1
 cd - >/dev/null 2>&1
 clear
-echo -e "Starting Altbet daemon, please be patient"
+echo -e "Starting new Altbet daemon, please be patient"
 systemctl start altbet
 clear
 sleep 3
