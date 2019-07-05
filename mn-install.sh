@@ -6,12 +6,11 @@ CONFIGFOLDER='/root/.altbet'
 COIN_DAEMON='altbetd'
 COIN_CLI='altbet-cli'
 COIN_PATH='/usr/local/bin/'
-COIN_TGZ='https://github.com/altbet/abet/releases/download/v.2.0.0.3/altbet-v2.0.0.3-ubu1604.tar.gz'
+COIN_TGZ='https://github.com/altbet/abet/releases/download/v1.0.0.0/altbet-v1.0.0.0-ubu1604.tar.gz'
 COIN_ZIP=$(echo $COIN_TGZ | awk -F'/' '{print $NF}')
 COIN_NAME='altbet'
-COIN_PORT=2238
-RPC_PORT=2239
-COIN_BLOCKS='https://github.com/altbet/bootstraps/releases/download/352483/bootstrap.zip'
+COIN_PORT=8322
+RPC_PORT=9322
 
 NODEIP=$(curl -s4 icanhazip.com)
 
@@ -19,16 +18,6 @@ NODEIP=$(curl -s4 icanhazip.com)
 RED='\033[0;31m'
 GREEN='\033[0;32m'
 NC='\033[0m'
-
-function sync_node() {
-  echo -e "Synchronizing. This might take few minutes. Please be patient."
-  cd $CONFIGFOLDER >/dev/null 2>&1
-  rm -r {budget.dat,fee_estimates.dat,peers.dat,chainstate,sporks,backups,db.log,mncache.dat,wallet.dat,blocks,debug.log,mnpayments.dat,zerocoin} >/dev/null 2>&1
-  wget -q $COIN_BLOCKS -O bootstrap.zip
-  unzip -q bootstrap.zip >/dev/null 2>&1
-  rm -r {__MACOSX,bootstrap.zip} >/dev/null 2>&1
-  cd - >/dev/null 2>&1
-}
 
 function download_node() {
   echo -e "Preparing to download ${GREEN}$COIN_NAME${NC}."
@@ -134,24 +123,9 @@ externalip=$NODEIP:$COIN_PORT
 masternodeprivkey=$COINKEY
 
 #Altbet addnodes
-addnode=185.206.146.209:2238
-addnode=185.206.147.210:2238
-addnode=185.206.144.217:2238
-addnode=185.141.61.104:2238
-addnode=173.199.70.37:2238
-addnode=95.216.79.247:2238
-addnode=188.40.177.100:2238
-addnode=46.4.178.72:2238
-addnode=18.220.148.197:2238
-addnode=80.241.209.135:2238
-addnode=3.92.226.82:2238
-addnode=79.143.189.26:2238
-addnode=167.86.84.174:2238
-addnode=3.84.13.102:2238
-addnode=95.179.155.105:2238
-addnode=119.29.69.190:2238
-addnode=5.189.145.170:2238
-addnode=18.191.235.229:2238
+addnode=140.82.1.78
+addnode=8.9.36.49
+addnode=140.82.48.162
 EOF
 }
 
