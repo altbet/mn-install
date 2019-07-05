@@ -3,7 +3,7 @@
 Shell script to install a Altbet Masternode on a Linux server running Ubuntu 16.04. Use it on your own risk.
 ***
 
-## VPS installation for version **2.0.0.3**
+## VPS installation for version **1.0.0.0**
 ```
 wget -N https://raw.githubusercontent.com/altbet/mn-install/master/mn-install.sh
 bash mn-install.sh
@@ -15,7 +15,7 @@ bash mn-install.sh
 After the Masternode is up and running, you need to configure the desktop wallet accordingly. Here are the steps:
 1. Open the altbet Desktop Wallet.
 2. Go to RECEIVE and create a New Address: **MN1**
-3. Send **5000** ABET to **MN1**. You need to send all 5000 coins in one single transaction.
+3. Send **10000** ABET to **MN1**. You need to send all 10000 coins in one single transaction.
 4. Wait for 16 confirmations.
 5. Go to **Help -> "Debug Window - Console"**
 6. Type the following command: **masternode outputs**
@@ -59,7 +59,7 @@ systemctl is-enabled altbet #To check if altbet service is enabled on boot
 ```
 ***
 
-## Masternode update:
+## Masternode update (script outdated, don't use it):
 In order to update your Altbet Masternode to version 2.0.0.3, please run the following commands:
 ```
 wget -N https://raw.githubusercontent.com/altbet/mn-install/master/update.sh
