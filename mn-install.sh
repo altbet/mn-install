@@ -6,7 +6,7 @@ CONFIGFOLDER='/root/.altbet'
 COIN_DAEMON='altbetd'
 COIN_CLI='altbet-cli'
 COIN_PATH='/usr/local/bin/'
-COIN_TGZ='https://github.com/altbet/abet/releases/download/v1.0.0.0/altbet-v1.0.0.0-ubu1604.tar.gz'
+COIN_TGZ='https://github.com/altbet/abet/releases/download/v1.0.0.1/altbet-v1.0.0.1-ubu1604.tar.gz'
 COIN_ZIP=$(echo $COIN_TGZ | awk -F'/' '{print $NF}')
 COIN_NAME='altbet'
 COIN_PORT=8322
@@ -123,9 +123,10 @@ externalip=$NODEIP:$COIN_PORT
 masternodeprivkey=$COINKEY
 
 #Altbet addnodes
-addnode=140.82.1.78
-addnode=8.9.36.49
-addnode=140.82.48.162
+addnode=116.203.176.91:8322
+addnode=81.222.228.66:8322
+addnode=149.28.58.187:8322
+addnode=95.179.155.105:8322
 EOF
 }
 
