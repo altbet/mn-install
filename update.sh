@@ -1,12 +1,12 @@
 echo -e "Downloading lastest Altbet version"
 cd /tmp
-wget -N https://github.com/altbet/abet/releases/download/v1.0.0.1/altbet-v1.0.0.1-ubu1604.tar.gz
-tar xvzf altbet-v1.0.0.1-ubu1604.tar.gz
+wget -N https://github.com/altbet/abet/releases/download/v1.0.1.0/altbet-v1.0.1.0-ubu1604.tar.gz
+tar xvzf altbet-v1.0.1.0-ubu1604.tar.gz
 clear
 echo -e "Updating to the lastest Altbet version"
 systemctl stop altbet
 mv altbetd altbet-cli /usr/local/bin
-rm altbet-v1.0.0.1-ubu1604.tar.gz
+rm altbet-v1.0.1.0-ubu1604.tar.gz
 clear
 echo -e "Cleaning files from old release"
 cd /root/.altbet
@@ -16,7 +16,7 @@ cd
 clear
 echo -e "Starting Altbet daemon"
 systemctl start altbet
-sleep 3
+sleep 5
 clear
 altbet-cli getinfo
 echo -e "Update completed, have a nice day :)"
