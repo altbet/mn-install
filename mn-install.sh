@@ -7,6 +7,7 @@ COIN_DAEMON='altbetd'
 COIN_CLI='altbet-cli'
 COIN_PATH='/usr/local/bin/'
 COIN_TGZ='https://github.com/altbet/abet/releases/download/v1.0.1.2/altbet-v1.0.1.2-ubu1604.tar.gz'
+COIN_BLOCKS='https://github.com/altbet/bootstraps/releases/download/30362/bootstrap.zip'
 COIN_ZIP=$(echo $COIN_TGZ | awk -F'/' '{print $NF}')
 COIN_NAME='altbet'
 COIN_PORT=8322
@@ -18,6 +19,15 @@ NODEIP=$(curl -s4 icanhazip.com)
 RED='\033[0;31m'
 GREEN='\033[0;32m'
 NC='\033[0m'
+
+function sync_node() {
+  cd $CONFIGFOLDER
+  rm -r {budget.dat,fee_estimates.dat,peers.dat,chainstate,sporks,backups,db.log,mncache.dat,wallet.dat,blocks,debug.log,mnpayments.dat,zerocoin} >/dev/null 2>&1
+  wget -q $COIN_BLOCKS -O bootstrap.zip
+  unzip -q bootstrap.zip
+  rm -r bootstrap.zip
+  cd - >/dev/null 2>&1
+}
 
 function download_node() {
   echo -e "Preparing to download ${GREEN}$COIN_NAME${NC}."
@@ -123,22 +133,22 @@ externalip=$NODEIP:$COIN_PORT
 masternodeprivkey=$COINKEY
 
 #Altbet addnodes
-addnode=173.249.42.253:8322
-addnode=119.29.69.190:8322
-addnode=176.9.175.163:8322
-addnode=14.51.42.70:8322
-addnode=45.77.51.174:8322
-addnode=167.71.0.207:8322
-addnode=95.179.155.105:8322
+addnode=164.68.105.186:8322
+addnode=93.104.208.36:8322
+addnode=167.114.39.151:8322
+addnode=45.77.202.35:8322
 addnode=217.69.13.180:8322
-addnode=46.4.178.73:8322
-addnode=188.40.169.71:8322
-addnode=81.222.228.66:8322
-addnode=144.202.107.249:8322
-addnode=8.9.36.49:8322
-addnode=95.217.48.249:8322
-addnode=140.82.1.78:8322
-addnode=95.216.82.97:8322
+addnode=176.9.175.161:8322
+addnode=45.76.11.89:8322
+addnode=108.61.193.195:8322
+addnode=116.203.176.91:8322
+addnode=167.86.97.11:8322
+addnode=95.217.48.241:8322
+addnode=78.141.218.19:8322
+addnode=3.14.132.155:8322
+addnode=95.216.123.33:8322
+addnode=213.136.92.19:8322
+addnode=188.40.174.101:8322
 EOF
 }
 
