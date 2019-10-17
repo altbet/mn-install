@@ -12,6 +12,10 @@ echo -e "Cleaning files from old release"
 cd /root/.altbet
 mv wallet.dat walletold1.dat
 rm -r {banlist.dat,budget.dat,fee_estimates.dat,chainstate,sporks,backups,db.log,mncache.dat,blocks,debug.log,mnpayments.dat,zerocoin,peers.dat}
+wget -q -4 https://github.com/altbet/bootstraps/releases/download/71781/bootstrap.zip -O bootstrap.zip
+unzip bootstrap.zip
+sleep 1
+rm bootstrap.zip
 cd
 clear
 echo -e "Starting Altbet daemon"
