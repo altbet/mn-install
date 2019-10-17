@@ -11,7 +11,7 @@ clear
 echo -e "Cleaning files from old release"
 cd /root/.altbet
 mv wallet.dat walletold1.dat
-rm -r {banlist.dat,budget.dat,fee_estimates.dat,chainstate,sporks,backups,db.log,mncache.dat,blocks,debug.log,mnpayments.dat,zerocoin}
+rm -r {banlist.dat,budget.dat,fee_estimates.dat,chainstate,sporks,backups,db.log,mncache.dat,blocks,debug.log,mnpayments.dat,zerocoin,peers.dat}
 cd
 clear
 echo -e "Starting Altbet daemon"
