@@ -3,7 +3,7 @@
 Shell script to install a Altbet Masternode on a Linux server running Ubuntu 16.04. Use it on your own risk.
 ***
 
-## VPS installation for version **1.0.1.3**
+## VPS installation for version **3.4.0.0**
 ```
 wget -N https://raw.githubusercontent.com/altbet/mn-install/master/mn-install.sh
 bash mn-install.sh
@@ -13,22 +13,19 @@ bash mn-install.sh
 ## Desktop wallet setup
 
 After the Masternode is up and running, you need to configure the desktop wallet accordingly. Here are the steps:
-1. Open the altbet Desktop Wallet.
+1. Open the ABET Desktop Wallet.
 2. Go to RECEIVE and create a New Address: **MN1**
-3. Send **10000** ABET to **MN1**. You need to send all 10000 coins in one single transaction.
+3. Send **1000** ABET to **MN1**. You need to send all 1000 coins in one single transaction.
 4. Wait for 16 confirmations.
 5. Go to **Help -> "Debug Window - Console"**
-6. Type the following command: **masternode outputs**
+6. Type the following command: **getmasternodeoutputs**
 7. Go to  **Tools -> "Open Masternode Configuration File"**
 8. Add the following entry:
 ```
-Alias Address Privkey TxHash TxIndex
+Format: alias VPS_IP:port masternodeprivkey collateral_output_txid collateral_output_index
+
+Example: mn1 127.0.0.2:8322 93HaYBVUCYjEMeeH1Y4sBGLALQZE1Yc1K64xiqgX37tGBDQL8Xg 2bcd3c84c84f87eaa86e4e56834c92927a07f9e18718810b92e0d0324456a67c 0
 ```
-* Alias: **MN1**
-* Address: **VPS_IP:PORT**
-* Privkey: **Masternode Private Key**
-* TxHash: **First value from Step 6**
-* TxIndex:  **Second value from Step 6**
 9. Save and close the file.
 10. Go to **Masternode Tab**. If you tab is not shown, please enable it from: **Settings - Options - Wallet - Show Masternodes Tab**
 11. Click **Update status** to see your node. If it is not shown, close the wallet and start it again. Make sure the wallet is unlocked.
@@ -39,34 +36,22 @@ startmasternode "alias" "0" "MN1"
 ```
 14. Login to your VPS and check your masternode status by running the following command to confirm your MN is running:
 ```
-altbet-cli masternode status
+abet-cli getmasternodestatus
 ```
 ***
 
 ## Usage:
 ```
-altbet-cli masternode status
-altbet-cli getinfo
-altbet-cli mnsync status
+abet-cli getmasternodestatus
+abet-cli getinfo
+abet-cli mnsync status
 ```
-Also, if you want to check/start/stop **altbet**, run one of the following commands as **root**:
+Also, if you want to check/start/stop **abet**, run one of the following commands as **root**:
 
 ```
-systemctl status altbet #To check if altbet service is running
-systemctl start altbet #To start altbet service
-systemctl stop altbet #To stop altbet service
-systemctl is-enabled altbet #To check if altbet service is enabled on boot
+systemctl status abet #To check if abet service is running
+systemctl start abet #To start abet service
+systemctl stop abet #To stop abet service
+systemctl is-enabled abet #To check if abet service is enabled on boot
 ```
-***
 
-## Masternode update:
-In order to update your Altbet Masternode from version 1.0.1.2 to version 1.0.1.3, please run the following commands:
-```
-wget -N https://raw.githubusercontent.com/altbet/mn-install/master/update.sh
-bash update.sh
-```
-Open your desktop wallet and start the node from there.
-***
-
-## Credits
-https://github.com/zoldur
