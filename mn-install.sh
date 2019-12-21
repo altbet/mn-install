@@ -1,33 +1,22 @@
 #!/bin/bash
 
 TMP_FOLDER=$(mktemp -d)
-CONFIG_FILE='altbet.conf'
-CONFIGFOLDER='/root/.altbet'
-COIN_DAEMON='altbetd'
-COIN_CLI='altbet-cli'
+CONFIG_FILE='abet.conf'
+CONFIGFOLDER='/root/.abet'
+COIN_DAEMON='abetd'
+COIN_CLI='abet-cli'
 COIN_PATH='/usr/local/bin/'
-COIN_TGZ='https://github.com/altbet/abet/releases/download/v1.0.1.3/altbet-v1.0.1.3-ubu1604.tar.gz'
-COIN_BLOCKS='https://github.com/altbet/bootstraps/releases/download/71781/bootstrap.zip'
+COIN_TGZ='https://github.com/altbet/abet/releases/download/v3.4.0.0/abet-v3.4.0.0-ubu1604.tar.gz'
 COIN_ZIP=$(echo $COIN_TGZ | awk -F'/' '{print $NF}')
-COIN_NAME='altbet'
+COIN_NAME='abet'
 COIN_PORT=8322
 RPC_PORT=9322
 
 NODEIP=$(curl -s4 icanhazip.com)
 
-
 RED='\033[0;31m'
 GREEN='\033[0;32m'
 NC='\033[0m'
-
-function sync_node() {
-  cd $CONFIGFOLDER
-  rm -r {budget.dat,fee_estimates.dat,peers.dat,chainstate,sporks,backups,db.log,mncache.dat,wallet.dat,blocks,debug.log,mnpayments.dat,zerocoin} >/dev/null 2>&1
-  wget -q $COIN_BLOCKS -O bootstrap.zip
-  unzip -q bootstrap.zip
-  rm -r bootstrap.zip
-  cd - >/dev/null 2>&1
-}
 
 function download_node() {
   echo -e "Preparing to download ${GREEN}$COIN_NAME${NC}."
@@ -39,7 +28,6 @@ function download_node() {
   rm -rf $TMP_FOLDER >/dev/null 2>&1
   clear
 }
-
 
 function configure_systemd() {
   cat << EOF > /etc/systemd/system/$COIN_NAME.service
@@ -82,7 +70,6 @@ EOF
   fi
 }
 
-
 function create_config() {
   mkdir $CONFIGFOLDER >/dev/null 2>&1
   RPCUSER=$(tr -cd '[:alnum:]' < /dev/urandom | fold -w10 | head -n1)
@@ -96,7 +83,6 @@ listen=1
 server=1
 debug=0
 daemon=1
-port=$COIN_PORT
 EOF
 }
 
@@ -110,12 +96,12 @@ function create_key() {
    echo -e "${RED}$COIN_NAME server couldn not start. Check /var/log/syslog for errors.{$NC}"
    exit 1
   fi
-  COINKEY=$($COIN_PATH$COIN_CLI masternode genkey)
+  COINKEY=$($COIN_PATH$COIN_CLI createmasternodekey)
   if [ "$?" -gt "0" ];
     then
     echo -e "${RED}Wallet not fully loaded. Let us wait and try again to generate the Private Key${NC}"
     sleep 30
-    COINKEY=$($COIN_PATH$COIN_CLI masternode genkey)
+    COINKEY=$($COIN_PATH$COIN_CLI createmasternodekey)
   fi
   $COIN_PATH$COIN_CLI stop
 fi
@@ -126,32 +112,22 @@ function update_config() {
   sed -i 's/daemon=1/daemon=0/' $CONFIGFOLDER/$CONFIG_FILE
   cat << EOF >> $CONFIGFOLDER/$CONFIG_FILE
 logintimestamps=1
-maxconnections=64
+maxconnections=256
 #bind=$NODEIP
 masternode=1
 externalip=$NODEIP:$COIN_PORT
 masternodeprivkey=$COINKEY
 
-#Altbet addnodes
-addnode=164.68.105.186:8322
-addnode=93.104.208.36:8322
-addnode=167.114.39.151:8322
-addnode=45.77.202.35:8322
-addnode=217.69.13.180:8322
-addnode=176.9.175.161:8322
-addnode=45.76.11.89:8322
-addnode=108.61.193.195:8322
-addnode=116.203.176.91:8322
-addnode=167.86.97.11:8322
-addnode=95.217.48.241:8322
-addnode=78.141.218.19:8322
-addnode=3.14.132.155:8322
-addnode=95.216.123.33:8322
-addnode=213.136.92.19:8322
-addnode=188.40.174.101:8322
+#addnodes
+addnode=185.206.147.210:$COIN_PORT
+addnode=185.206.144.217:$COIN_PORT
+addnode=185.141.61.104:$COIN_PORT
+addnode=63.209.32.202:$COIN_PORT
+addnode=173.199.118.20:$COIN_PORT
+addnode=108.224.49.202:$COIN_PORT
+addnode=144.202.2.218:$COIN_PORT
 EOF
 }
-
 
 function enable_firewall() {
   echo -e "Installing and setting up firewall to allow ingress on port ${GREEN}$COIN_PORT${NC}"
@@ -161,7 +137,6 @@ function enable_firewall() {
   ufw default allow outgoing >/dev/null 2>&1
   echo "y" | ufw enable >/dev/null 2>&1
 }
-
 
 function get_ip() {
   declare -a NODE_IPS
@@ -186,7 +161,6 @@ function get_ip() {
   fi
 }
 
-
 function compile_error() {
 if [ "$?" -gt "0" ];
  then
@@ -194,7 +168,6 @@ if [ "$?" -gt "0" ];
   exit 1
 fi
 }
-
 
 function checks() {
 if [[ $(lsb_release -d) != *16.04* ]]; then
@@ -251,7 +224,7 @@ function important_information() {
   echo -e "VPS_IP:PORT ${RED}$NODEIP:$COIN_PORT${NC}"
   echo -e "MASTERNODE PRIVATEKEY is: ${RED}$COINKEY${NC}"
   echo -e "Please check ${RED}$COIN_NAME${NC} daemon is running with the following command: ${RED}systemctl status $COIN_NAME.service${NC}"
-  echo -e "Use ${RED}$COIN_CLI masternode status${NC} to check your MN."
+  echo -e "Use ${RED}$COIN_CLI getmasternodestatus${NC} to check your MN."
   if [[ -n $SENTINEL_REPO  ]]; then
   echo -e "${RED}Sentinel${NC} is installed in ${RED}$CONFIGFOLDER/sentinel${NC}"
   echo -e "Sentinel logs is: ${RED}$CONFIGFOLDER/sentinel.log${NC}"
@@ -262,14 +235,12 @@ function important_information() {
 function setup_node() {
   get_ip
   create_config
-  sync_node
   create_key
   update_config
   enable_firewall
   important_information
   configure_systemd
 }
-
 
 ##### Main #####
 clear
