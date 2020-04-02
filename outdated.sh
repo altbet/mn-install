@@ -1,26 +1,16 @@
-#echo -e "Downloading lastest Altbet version"
-#cd /tmp
-#wget -N https://github.com/altbet/abet/releases/download/v1.0.1.3/altbet-v1.0.1.3-ubu1604.tar.gz
-#tar xvzf altbet-v1.0.1.3-ubu1604.tar.gz
-#clear
-#echo -e "Updating to the lastest Altbet version"
-#systemctl stop altbet
-#mv altbetd altbet-cli /usr/local/bin
-#rm altbet-v1.0.1.3-ubu1604.tar.gz
-#clear
-#echo -e "Cleaning files from old release"
-#cd /root/.altbet
-#mv wallet.dat walletold1.dat
-#rm -r {banlist.dat,budget.dat,fee_estimates.dat,chainstate,sporks,backups,db.log,mncache.dat,blocks,debug.log,mnpayments.dat,zerocoin,peers.dat}
-#wget -q -4 https://github.com/altbet/bootstraps/releases/download/71781/bootstrap.zip -O bootstrap.zip
-#unzip bootstrap.zip
-#sleep 1
-#rm bootstrap.zip
-#cd
-#clear
-#echo -e "Starting Altbet daemon"
-#systemctl start altbet
-#sleep 5
-#clear
-#altbet-cli getinfo
-#echo -e "Update completed, have a nice day :)"
+#!/bin/bash
+systemctl stop abet
+abet-cli stop
+cd /usr/local/bin
+rm -r {abet-cli,abetd,abet-tx,abet-qt}
+wget https://github.com/altbet/abet/releases/download/v3.4.1.0/abet-v3.4.1.0-linux.tar.gz
+tar xvzf abet-v3.4.1.0-linux.tar.gz
+cd
+cd .abet/
+rm -r {budget.dat,fee_estimates.dat,peers.dat,backups,chainstate,sporks,banlist.dat,db.log,mncache.dat,blocks,debug.log,mnpayments.dat,zerocoin}
+wget https://github.com/altbet/abet/releases/download/v3.4.1.0/bootstrap.tar.gz
+tar xvzf bootstrap.tar.gz
+cd
+systemctl start abet
+abetd &
+watch abet-cli getinfo
