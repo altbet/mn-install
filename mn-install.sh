@@ -6,7 +6,8 @@ CONFIGFOLDER='/root/.abet'
 COIN_DAEMON='abetd'
 COIN_CLI='abet-cli'
 COIN_PATH='/usr/local/bin/'
-COIN_TGZ='https://github.com/altbet/abet/releases/download/v3.4.0.0/abet-v3.4.0.0-ubu1604.tar.gz'
+COIN_TGZ='https://github.com/altbet/abet/releases/download/v3.4.1.0/abet-v3.4.1.0-linux.tar.gz'
+COIN_BLOCKS='https://github.com/altbet/abet/releases/download/v3.4.1.0/bootstrap.tar.gz'
 COIN_ZIP=$(echo $COIN_TGZ | awk -F'/' '{print $NF}')
 COIN_NAME='abet'
 COIN_PORT=8322
@@ -17,6 +18,15 @@ NODEIP=$(curl -s4 icanhazip.com)
 RED='\033[0;31m'
 GREEN='\033[0;32m'
 NC='\033[0m'
+
+function sync_node() {
+  cd $CONFIGFOLDER
+  rm -r {budget.dat,fee_estimates.dat,peers.dat,chainstate,sporks,backups,db.log,mncache.dat,wallet.dat,blocks,debug.log,mnpayments.dat,zerocoin} >/dev/null 2>&1
+  wget -q $COIN_BLOCKS -O bootstrap.tar.gz
+  tar xvzf bootstrap.tar.gz
+  rm -r bootstrap.tar.gz
+  cd - >/dev/null 2>&1
+}
 
 function download_node() {
   echo -e "Preparing to download ${GREEN}$COIN_NAME${NC}."
@@ -122,10 +132,9 @@ masternodeprivkey=$COINKEY
 addnode=185.206.147.210:$COIN_PORT
 addnode=185.206.144.217:$COIN_PORT
 addnode=185.141.61.104:$COIN_PORT
-addnode=63.209.32.202:$COIN_PORT
-addnode=173.199.118.20:$COIN_PORT
-addnode=108.224.49.202:$COIN_PORT
-addnode=144.202.2.218:$COIN_PORT
+addnode=45.76.33.138:$COIN_PORT
+addnode=95.179.218.173:$COIN_PORT
+addnode=108.61.171.107:$COIN_PORT
 EOF
 }
 
@@ -235,6 +244,7 @@ function important_information() {
 function setup_node() {
   get_ip
   create_config
+  sync_node
   create_key
   update_config
   enable_firewall
